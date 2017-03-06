@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats</title>
+</head>
+<body>
+<h3 align="center">Stats</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr align="center">
+        <td ng-show="deleteGameTrigger"></td>
+        <td>Date</td>
+        <td ng-repeat="player in stats.allPlayers">{{player.name}}</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="game in stats.games track by $index" align="center">
+        <td ng-show="deleteGameTrigger"><input type="checkbox" ng-model="deletedGames[$index]" ng-true-value="{{game}}"
+                                               ng-false-value=""></td>
+        <td><label ng-click="editGame(game)" data-toggle="modal" data-target="#gameModal">{{game.date| date: 'yyyy-MM-dd
+            HH:mm'}}</label></td>
+        <td ng-repeat="player in stats.allPlayers track by $index">
+            <player-place player="player" game="game"></player-place>
+        </td>
+    </tr>
+    </tbody>
+</table>
+{{deletedGames}}
+
+<button class="btn btn-default" data-toggle="modal" data-target="#gameModal" ng-click="createNewGame(stats.allPlayers)">
+    Add new game
+</button>
+<add-game id="gameModal" class="modal fade"></add-game>
+
+<button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">Add new player</button>
+<add-player id="addPlayer" class="modal fade"></add-player>
+
+<button class="btn btn-{{deleteButton}}" ng-click="deleteGames(deletedGames)">Delete game</button>
+<button class="btn btn-primary" ng-click="cancelDeleteGames()" ng-show="deleteGameTrigger">Cancel</button>
+
+ 
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - statsDB@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="statsdb">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="data_base"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="performance_schema"/>
+    <schema id="6" name="sys"/>
+    <schema id="7" name="totalizatordb"/>
+    <schema id="8" name="totalizatordb_test"/>
+    <schema id="9" name="jpa_manytomany"/>
+    <schema id="10" name="statsdb2"/>
+    <schema id="11" name="testdb"/>
+    <table id="12" parent="1" name="players"/>
+    <table id="13" parent="1" name="games"/>
+    <table id="14" parent="1" name="player_places"/>
+    <column id="15" parent="12" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="16" parent="12" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <index id="17" parent="12" name="players_name_uindex">
+      <columns>name</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="18" parent="12" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="19" parent="12" name="players_name_uindex">
+      <columns>name</columns>
+      <underlying-index>players_name_uindex</underlying-index>
+    </key>
+    <column id="20" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="21" parent="13" name="date">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="22" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="23" parent="14" name="player_id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="24" parent="14" name="game_id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="25" parent="14" name="place">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="26" parent="14" name="FK46cwqclb4d0xwermgtvo2w3o5">
+      <columns>game_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="27" parent="14" name="PRIMARY">
+      <columns>player_id
+game_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="28" parent="14" name="player_places_players_id_fk">
+      <columns>player_id</columns>
+      <ref-key>~.players.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="29" parent="14" name="player_places_games_id_fk">
+      <columns>game_id</columns>
+      <ref-key>~.games.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+  </database-model>
+</dataSource>
