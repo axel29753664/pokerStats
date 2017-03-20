@@ -6,10 +6,7 @@ import lv.axel.model.GameDTO;
 import lv.axel.model.PlayerPlaceDTO;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GameDTOConverter {
 
@@ -31,7 +28,7 @@ public class GameDTOConverter {
         GameDTO gameDTO = new GameDTO();
         gameDTO.setId(game.getId());
         gameDTO.setDate(game.getDate());
-        List<PlayerPlaceDTO> playersPlacesDTO = new ArrayList<>();
+        Set<PlayerPlaceDTO> playersPlacesDTO = new TreeSet<>();
         for (PlayerPlace playerPlace : game.getPlayersPlaces()) {
             playersPlacesDTO.add(PlayerPlaceDTOConverter.convertToDTO(playerPlace));
         }

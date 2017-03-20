@@ -14,6 +14,6 @@ import java.util.Set;
 @ToString
 @RequiredArgsConstructor
 public class StatsDTO {
-    private List<GameDTO> games;
-    private List<PlayerDTO> allPlayers;
+    private Set<GameDTO> games;
+    private Set<PlayerDTO> allPlayers;
 }

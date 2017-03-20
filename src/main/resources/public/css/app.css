@@ -1,0 +1,21 @@
+.panel-color-floral-white {
+    background: floralwhite;
+    color: black;
+}
+.panel-color-light-gray {
+    background: lightgray;
+    color: black;
+}
+
+.top-margin-20 {
+    margin-top: 20px;
+}
+
+.equal-width-cols {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.equal-width-cols td {
+    width: 100%;
+}

@@ -1,0 +1,42 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header" align="center">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Введите дату, время и места игроков</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 align="center">
+                        Дата: <input class="form-group-lg text-center" type="datetime-local" ng-model="newGame.date"/>
+                    </h4>
+                </div>
+                <div class="panel-body" align="center">  
+
+                    <table class="table table-bordered equal-width-cols">
+                        <thead>
+                        <tr align="center">
+                            <td ng-repeat="playerPlace in newGame.playersPlaces">{{playerPlace.player.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td ng-repeat="playerPlace in newGame.playersPlaces">
+                                <input type="number" class="form-control text-center" ng-model="playerPlace.place"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="saveGame(newGame)" data-dismiss="modal">
+                Сохранить изменения
+            </button>
+        </div>
+    </div>
+</div>

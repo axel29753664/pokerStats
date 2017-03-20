@@ -26,7 +26,7 @@ public class GameService {
             playerPlace.setPlayer(player);
             playerPlace.setGame(game);
         }
-         gameRepository.save(game);
+        gameRepository.save(game);
     }
 
     @Transactional
@@ -41,6 +41,10 @@ public class GameService {
             playerPlace.setGame(gameFromDB);
         }
         gameRepository.save(game);
+    }
+
+    public void deleteGameById(Long id) {
+        gameRepository.delete(id);
     }
 
     public List<Game> getAllGames() {

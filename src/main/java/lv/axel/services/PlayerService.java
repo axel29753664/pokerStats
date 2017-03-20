@@ -27,5 +27,9 @@ public class PlayerService {
     public Player findPlayerByName(String name) {
         return playerRepository.findByName(name);
     }
+
+    public void deletePlayerById(Long id) {
+        playerRepository.delete(id);
+    }
 }
 

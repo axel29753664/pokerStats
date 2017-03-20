@@ -1,44 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Stats</title>
-</head>
-<body>
-<h3 align="center">Stats</h3>
-<table class="table table-bordered">
-    <thead>
-    <tr align="center">
-        <td ng-show="deleteGameTrigger"></td>
-        <td>Date</td>
-        <td ng-repeat="player in stats.allPlayers">{{player.name}}</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="game in stats.games track by $index" align="center">
-        <td ng-show="deleteGameTrigger"><input type="checkbox" ng-model="deletedGames[$index]" ng-true-value="{{game}}"
-                                               ng-false-value=""></td>
-        <td><label ng-click="editGame(game)" data-toggle="modal" data-target="#gameModal">{{game.date| date: 'yyyy-MM-dd
-            HH:mm'}}</label></td>
-        <td ng-repeat="player in stats.allPlayers track by $index">
-            <player-place player="player" game="game"></player-place>
-        </td>
-    </tr>
-    </tbody>
-</table>
-{{deletedGames}}
+<div class="panel panel-primary top-margin-20">
+    <div class="panel-heading" align="center">
+        <h3>Статистика</h3>
+    </div>
+    <div class="panel-body">
 
-<button class="btn btn-default" data-toggle="modal" data-target="#gameModal" ng-click="createNewGame(stats.allPlayers)">
-    Add new game
-</button>
-<add-game id="gameModal" class="modal fade"></add-game>
+        <div class="panel" ng-show="authenticated">
+            <div class="button-group">
+                <button class="btn btn-default" data-toggle="modal" data-target="#gameModal"
+                        ng-click="createNewGame(stats.allPlayers)">
+                    Добавить игру
+                </button>
+                <add-game id="gameModal" class="modal fade"></add-game>
 
-<button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">Add new player</button>
-<add-player id="addPlayer" class="modal fade"></add-player>
+                <button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">Добавить игрока
+                </button>
+                <add-player id="addPlayer" class="modal fade"></add-player>
+                <div class="button-group pull-right" ng-show="adminAccess">
+                    <button class="btn btn-{{deleteButton}}" ng-click="deleteGames(deletedGamesIds)">Удалить игру
+                    </button>
+                    <button class="btn btn-primary" ng-click="cancelDeleteGames()" ng-show="deleteGameTrigger">
+                        Отмена
+                    </button>
 
-<button class="btn btn-{{deleteButton}}" ng-click="deleteGames(deletedGames)">Delete game</button>
-<button class="btn btn-primary" ng-click="cancelDeleteGames()" ng-show="deleteGameTrigger">Cancel</button>
+                    <button class="btn btn-{{deletePlayersButton}}" ng-click="deletePlayers(deletedPlayersIds)">
+                        Удалить
+                        игрока
+                    </button>
+                    <button class="btn btn-primary" ng-click="cancelDeletePlayers()" ng-show="deletePlayersTrigger">
+                        Отмена
+                    </button>
+                     
+                </div>
+            </div>
+        </div>
 
- 
-</body>
-</html>
+        <table class="table table-bordered equal-width-cols">
+            <thead>
+            <tr align="center" class="panel-color-floral-white">
+                <td ng-show="deleteGameTrigger"></td>
+                <td>Дата</td>
+                <td ng-repeat="player in stats.allPlayers track by $index"> {{player.name}}</td>
+            </tr>
+            <tr ng-show="deletePlayersTrigger" align="center">
+                <td ng-show="deleteGameTrigger"></td>
+                <td></td>
+                <td ng-repeat="player in stats.allPlayers track by $index">
+                    <input type="checkbox" ng-model="deletedPlayersIds[$index]"
+                           ng-true-value="{{player.id}}"
+                           ng-false-value="">
+                </td>
+            </tr>
+            </thead>
+            <tbody align="center">
+            <tr>
+                <td ng-show="deleteGameTrigger"></td>
+                <td>Среднее место</td>
+                <td ng-repeat="playerAveragePlace in playersAveragePlaces track by $index">
+                    <b>{{playerAveragePlace.place==0 ? noPlaceValue :(playerAveragePlace.place| number:2) }}</b></td>
+            </tr>
+            <tr ng-repeat="game in stats.games track by $index">
+                <td ng-show="deleteGameTrigger"><input type="checkbox" ng-model="deletedGamesIds[$index]"
+                                                       ng-true-value="{{game.id}}"
+                                                       ng-false-value=""></td>
+                <td ng-switch="adminAccess">
+                    <label ng-switch-when="true" ng-click="editGame(game)" data-toggle="modal" data-target="#gameModal">
+                        {{game.date| date: 'yyyy-MM-dd'}}</label>
+                    <div ng-switch-when="false">{{game.date| date: 'yyyy-MM-dd'}}</div>
+                </td>
+                <td ng-repeat="playerPlace in game.playersPlaces"> {{playerPlace.place==0 ? noPlaceValue
+                    :playerPlace.place}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

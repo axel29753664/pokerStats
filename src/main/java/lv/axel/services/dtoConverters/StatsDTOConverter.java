@@ -13,19 +13,19 @@ import java.util.*;
 
 @Service
 public class StatsDTOConverter {
-    public static StatsDTO convertEntity(List<Player> players, List<Game> games) {
+    public static StatsDTO convertToDTO(List<Player> players, List<Game> games) {
 
         StatsDTO statsDTO = new StatsDTO();
-        List<GameDTO> gameDTOList = new ArrayList<>();
+        Set<GameDTO> gameDTOList = new TreeSet<>();
         for (Game game : games) {
-            List<PlayerPlaceDTO> playerPlacesDTO = new ArrayList<>();
+            Set<PlayerPlaceDTO> playerPlacesDTO = new TreeSet<>();
             for (PlayerPlace playerPlace : game.getPlayersPlaces()) {
                 playerPlacesDTO.add(PlayerPlaceDTOConverter.convertToDTO(playerPlace));
             }
             gameDTOList.add(new GameDTO(game.getId(),game.getDate(), playerPlacesDTO));
         }
 
-        List<PlayerDTO> playersDTO = new ArrayList<>();
+        Set<PlayerDTO> playersDTO = new TreeSet<>();
         for (Player player : players) {
             playersDTO.add(PlayerDTOConverter.convertToDTO(player));
         }

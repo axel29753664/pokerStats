@@ -11,8 +11,13 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameDTO {
+public class GameDTO implements Comparable<GameDTO> {
     private Long id;
     private Date date;
-    private List<PlayerPlaceDTO> playersPlaces;
+    private Set<PlayerPlaceDTO> playersPlaces;
+
+    @Override
+    public int compareTo(GameDTO gameDTO) {
+        return -date.compareTo(gameDTO.getDate());
+    }
 }

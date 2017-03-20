@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/app.css" rel="stylesheet">
     <title>Start</title>
 </head>
 <body ng-app="mainApp">
+
+<div ng-controller="loginController as login">
+<ul class="nav nav-pills" role="tablist">
+    <li><a href="#!/">Stats</a></li>
+    <li><a href="#!/login">Login</a></li>
+    <li ng-show="authenticated"><a href="" ng-click="login.logout()">Logout</a></li>
+</ul>
+</div>
+
 <div class="container">
     <div ng-view></div>
 </div>
@@ -16,10 +26,13 @@
 <script type="text/javascript" src="js/lib/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="js/app/main.js"></script>
+<script type="text/javascript" src="js/app/config.js"></script>
 <script type="text/javascript" src="js/app/directives.js"></script>
+<script type="text/javascript" src="js/app/loginController.js"></script>
 <script type="text/javascript" src="js/app/statsController.js"></script>
 <script type="text/javascript" src="js/app/statsService.js"></script>
+<script type="text/javascript" src="js/app/gameService.js"></script>
+<script type="text/javascript" src="js/app/playerService.js"></script>
 <!--only to development scope -->
 <script type="text/javascript" src="js/app/testModels.js"></script>
 
