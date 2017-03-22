@@ -1,16 +1,18 @@
-<div class="alert alert-danger" ng-show="loginCtrl.error">
-    Login failed. Please try again.
+<div class="col-md-offset-4 col-md-3">
+    <div class="alert alert-danger" ng-show="loginCtrl.error">
+        Не возможно войти. Попробуйте ещё раз.
+    </div>
+    <div class="wrapper">
+        <form class="form-signin" ng-submit="loginCtrl.login()">
+            <h4 class="form-signin-heading" align="center">Введите логин и пароль</h4>
+            <input type="text" class="form-control" name="username" placeholder="Логин" required=""
+                   ng-model="loginCtrl.credentials.username"
+                   autofocus=""/>
+            <input type="password" class="form-control" name="password" placeholder="Пароль" required=""
+                   ng-model="loginCtrl.credentials.password"/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" >Войти</button>
+        </form>
+    </div>
 </div>
-<form role="form" ng-submit="loginCtrl.login()">
-    <div class="form-group">
-        <label for="username">Username:</label> <input type="text" class="form-control"
-                                                       id="username" name="username"
-                                                       ng-model="loginCtrl.credentials.username"/>
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label> <input type="password"
-                                                       class="form-control" id="password" name="password"
-                                                       ng-model="loginCtrl.credentials.password"/>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+

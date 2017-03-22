@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .controller("statsController", function ($scope, statsService, playerService, gameService) {
+    .controller("statsController", function ($scope, statsService, playerService, gameService, loginService) {
         $scope.deleteButton = "default";
         $scope.deletePlayersButton = "default";
         $scope.deleteGameTrigger = false;
@@ -8,9 +8,8 @@ angular.module("mainApp")
         init();
 
         function init() {
-
-            $scope.stats="";
-
+            loginService.authenticate();
+            $scope.stats = "";
             statsService.getStatsFromServer().then(function success(stats) {
 
                     var formatStats = statsService.convertStatsToTableFormat(stats);
