@@ -4,7 +4,7 @@ CREATE TABLE `games` (
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 1
+  AUTO_INCREMENT = 47
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `players` (
@@ -32,3 +32,36 @@ CREATE TABLE `player_places` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE `roles` (
+  `name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `Roles_name_uindex` (`name`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `users` (
+  `name`     VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `Users_name_uindex` (`name`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `user_roles` (
+  `user` VARCHAR(50) NOT NULL,
+  `role` VARCHAR(10) NOT NULL,
+  KEY `user_roles_users_name_fk` (`user`),
+  KEY `user_roles_roles_name_fk` (`role`),
+  CONSTRAINT `user_roles_roles_name_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `user_roles_users_name_fk` FOREIGN KEY (`user`) REFERENCES `users` (`name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
