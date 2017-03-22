@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .factory("gameService", function ($http, $q, urls) {
+    .factory("gameService", function ($http, $q) {
         return {
             convertGameToTableFormat: function (game, allPlayers) {
                 var formatGame = {
@@ -40,9 +40,9 @@ angular.module("mainApp")
                 this.prepareGame(game);
                 var deferred = $q.defer();
                 if (game.id == undefined) {
-                    $http.post(urls.API + "addGame", game).then(success, error);
+                    $http.post("api/addGame", game).then(success, error);
                 } else {
-                    $http.post(urls.API + "updateGame", game).then(success, error);
+                    $http.post("api/updateGame", game).then(success, error);
                 }
 
                 function success(response) {
@@ -66,7 +66,7 @@ angular.module("mainApp")
             deleteGames: function (ids) {
                 this.prepareIdsArr(ids);
                 var deferred = $q.defer();
-                $http.post(urls.API + "deleteGames", ids).then(success, error);
+                $http.post("api/deleteGames", ids).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }

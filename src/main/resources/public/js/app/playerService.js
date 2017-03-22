@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .factory("playerService", function ($http, $q, urls) {
+    .factory("playerService", function ($http, $q) {
         return {
             getPlayersAveragePlaces: function (games) {
 
@@ -34,7 +34,7 @@ angular.module("mainApp")
             },
             sendPlayerToServer: function (player) {
                 var deferred = $q.defer();
-                $http.post(urls.API + "addPlayer", player).then(success, error);
+                $http.post("api/addPlayer", player).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }
@@ -56,7 +56,7 @@ angular.module("mainApp")
             deletePlayers: function (ids) {
                 this.prepareIdsArr(ids);
                 var deferred = $q.defer();
-                $http.post(urls.API + "deletePlayers", ids).then(success, error);
+                $http.post("api/deletePlayers", ids).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }

@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .factory("loginService", function ($rootScope, $http, $q, urls) {
+    .factory("loginService", function ($rootScope, $http, $q) {
             return {
                 authenticate: function (credentials) {
                     var deferred = $q.defer();
@@ -9,7 +9,7 @@ angular.module("mainApp")
                         + btoa(credentials.username + ":" + credentials.password)
                     } : {};
 
-                    $http.get(urls.HOME + 'user', {headers: headers}).then(success, error);
+                    $http.get('user', {headers: headers}).then(success, error);
                     function success(response) {
                         if (response.data.name) {
                             deferred.resolve(response);

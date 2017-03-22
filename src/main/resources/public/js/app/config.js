@@ -19,9 +19,3 @@ app.config(function ($routeProvider, $httpProvider) {
 
 });
 
-app.constant(
-    "urls", {
-        HOME: "http://localhost:8080/",
-        API: "http://localhost:8080/api/"
-    }
-);

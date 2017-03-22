@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .factory("statsService", function ($http, $q, urls, gameService) {
+    .factory("statsService", function ($http, $q, gameService) {
         return {
             convertStatsToTableFormat: function (stats) {
                 var games = stats.games;
@@ -16,10 +16,7 @@ angular.module("mainApp")
             getStatsFromServer: function () {
                 var deferred = $q.defer();
 
-                // deferred.resolve(testStatsModel);
-                // return deferred.promise;
-
-                $http.get(urls.API + "getStats").then(success, error);
+                $http.get("api/getStats").then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }
