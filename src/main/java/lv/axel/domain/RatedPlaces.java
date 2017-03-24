@@ -10,7 +10,8 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity

@@ -15,3 +15,12 @@ app.directive("addGame", function () {
     };
 
 });
+
+app.directive("updateRatedPlaces", function () {
+    return {
+        restrict: "E",
+        templateUrl: "editRatedPlacesModal.html"
+
+    };
+
+});

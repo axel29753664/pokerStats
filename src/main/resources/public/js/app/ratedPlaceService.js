@@ -17,22 +17,55 @@ angular.module("mainApp")
                 return deferred.promise;
             },
 
-            getRatedPlaces: function () {
-                var self = this;
-                var deferred = $q.defer();
-                self.getRatedPlacesFromServer().then(success);
-                function success(ratedPlacesFromServer){
-                    deferred.resolve(self.convertRatedPlacesToSet(ratedPlacesFromServer));
-                }
-
-                return deferred.promise;
-            },
             convertRatedPlacesToSet: function (ratedPlaces) {
                 var ratedPlacesSet = {};
                 for (var i = 0; i < ratedPlaces.length; i++) {
                     ratedPlacesSet[ratedPlaces[i].playersQuantity] = ratedPlaces[i].ratedPlacesQuantity;
                 }
                 return ratedPlacesSet;
+            },
+
+            checkRatedPlacesToWrongFormat: function (ratedPlaces) {
+                var errors = "";
+                for (var i = 0; i < ratedPlaces.length; i++) {
+                    if (ratedPlaces[i].ratedPlacesQuantity == undefined) {
+                        errors += ratedPlaces[i].playersQuantity
+                            + ": " + ratedPlaces[i].ratedPlacesQuantity + " ";
+                    }
+                }
+                if (errors != "") {
+                    return "Wrong enter at: " + errors;
+                }
+                return errors;
+            },
+            sendRatedPlacesToServer: function (ratedPlaces) {
+                var errors = this.checkRatedPlacesToWrongFormat(ratedPlaces);
+                var deferred = $q.defer();
+                if (errors != "") {
+                    deferred.reject(errors);
+                } else {
+                    $http.post("api/updateRatedPlaces", ratedPlaces).then(success, error);
+                    function success(response) {
+                    }
+
+                    function error(err) {
+                        console.warn("Error sending ratedPlaces to server");
+                        console.warn(err);
+                    }
+                }
+
+                return deferred.promise;
+            },
+            addNeRatedPlaces: function (allRatedPlaces, newRatedPlaces) {
+                if (newRatedPlaces != undefined) {
+                    if ((newRatedPlaces.playersQuantity != undefined)
+                        && (newRatedPlaces.ratedPlacesQuantity != undefined)
+                        && (newRatedPlaces.playersQuantity >= newRatedPlaces.ratedPlacesQuantity)) {
+                        allRatedPlaces[allRatedPlaces.length] = newRatedPlaces;
+                    } else {
+                        return "Wrong new rated place format";
+                    }
+                }
             }
         }
 

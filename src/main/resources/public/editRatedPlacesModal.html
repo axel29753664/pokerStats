@@ -1,0 +1,56 @@
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <div class="modal-header" align="center">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Введите количество игроков в игре и количество призовых мест.</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="panel panel-default">
+
+                <div class="panel-body" align="center">  
+
+                    <table class="table table-bordered equal-width-cols">
+                        <thead>
+                        <tr align="center">
+                            <td>Количество игроков</td>
+                            <td>Количество призовых мест</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr align="center" ng-repeat="ratedPlace in ratedPlaces">
+                            <td>
+                                {{ratedPlace.playersQuantity}}
+                            </td>
+                            <td>
+                                <input type="number" min="0" max="{{ratedPlace.playersQuantity}}"
+                                       class="form-control text-center"
+                                       ng-model="ratedPlace.ratedPlacesQuantity"/>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>
+                                <input type="number" min="0"
+                                       class="form-control text-center"
+                                       ng-model="newRatedPlaces.playersQuantity"/>
+                            </td>
+                            <td>
+                                <input type="number" min="0"
+                                       class="form-control text-center"
+                                       ng-model="newRatedPlaces.ratedPlacesQuantity"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="saveRatedPlaces(ratedPlaces)" data-dismiss="modal">
+                Сохранить изменения
+            </button>
+        </div>
+    </div>
+</div>

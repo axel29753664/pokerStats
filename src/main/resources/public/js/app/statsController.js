@@ -1,5 +1,5 @@
 angular.module("mainApp")
-    .controller("statsController", function ($scope, statsService, playerService, gameService, loginService) {
+    .controller("statsController", function ($scope, statsService, playerService, gameService, loginService, ratedPlacesService) {
         $scope.deleteButton = "default";
         $scope.deletePlayersButton = "default";
         $scope.deleteGameTrigger = false;
@@ -9,15 +9,23 @@ angular.module("mainApp")
 
         function init() {
             loginService.authenticate();
-            $scope.stats = "";
+            $scope.stats = undefined;
+            $scope.ratedPlaces = undefined;
+
             statsService.getStatsFromServer().then(function success(stats) {
 
                 var formatStats = statsService.convertStatsToTableFormat(stats);
                 $scope.stats = formatStats;
                 $scope.playersAveragePlaces = playerService.getPlayersAveragePlaces(formatStats.games);
-                $scope.playersRating = playerService.getPlayersRating(stats);
+
+                ratedPlacesService.getRatedPlacesFromServer().then(success);
+                function success(ratedPlaces) {
+                    $scope.ratedPlaces = ratedPlaces;
+                    $scope.playersRating = playerService.getPlayersRating(stats, ratedPlaces);
+                }
 
             });
+
         }
 
         $scope.addPlayer = function (player) {
@@ -95,6 +103,22 @@ angular.module("mainApp")
                 init();
             }
 
+        };
+        $scope.saveRatedPlaces = function (allRatedPlaces) {
+            var newRatedPlaces = $scope.newRatedPlaces;
+            var err = ratedPlacesService.addNeRatedPlaces(allRatedPlaces, newRatedPlaces);
+            if (err != undefined) {
+                alert(err);
+            }
+            ratedPlacesService.sendRatedPlacesToServer(allRatedPlaces).then(success,error);
+            function success() {
+            }
+
+            function error(err) {
+                alert(err);
+            }
+            $scope.newRatedPlaces = undefined;
+            init();
         };
 
     })

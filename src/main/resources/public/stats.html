@@ -29,6 +29,10 @@
                     <button class="btn btn-primary" ng-click="cancelDeletePlayers()" ng-show="deletePlayersTrigger">
                         Отмена
                     </button>
+                    <button class="btn btn-default" data-toggle="modal" data-target="#ratedPlacesModal">
+                        Поменять призовые места
+                    </button>
+                    <update-rated-places id="ratedPlacesModal" class="modal fade"></update-rated-places>
                      
                 </div>
             </div>
@@ -52,7 +56,7 @@
             </tr>
             </thead>
             <tbody align="center">
-            <tr  class="panel-color-floral-white">
+            <tr class="panel-color-floral-white">
                 <td ng-show="deleteGameTrigger"></td>
                 <td>Рейтинг</td>
                 <td ng-repeat="playerRating in playersRating track by $index">

@@ -1,12 +1,12 @@
 angular.module("mainApp")
     .factory("playerService", function ($http, $q, ratedPlacesService) {
         return {
-            getPlayersRating: function (stats) {
+            getPlayersRating: function (stats, ratedPlacesFromServer) {
                 var self = this;
                 var playersRating = self.initPlayerRating(stats.allPlayers);
-                ratedPlacesService.getRatedPlaces().then(success);
-                function success(allRatedPlaceQuantity) {
-                    var games = stats.games;
+                var allRatedPlaceQuantity= ratedPlacesService.convertRatedPlacesToSet(ratedPlacesFromServer);
+
+                var games = stats.games;
                     for (var i = 0; i < games.length; i++) {
                         var playersPlaces = games[i].playersPlaces;
                         var ratedPlaceQuantityInGame = self.getRatedPlaceQuantityInGame(playersPlaces, allRatedPlaceQuantity);
@@ -16,7 +16,6 @@ angular.module("mainApp")
                             }
                         }
                     }
-                }
 
                 return playersRating;
             },

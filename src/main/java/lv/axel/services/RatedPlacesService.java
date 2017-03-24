@@ -15,4 +15,8 @@ public class RatedPlacesService {
     public List<RatedPlaces> getAllRatedPlaces() {
         return ratedPlaceRepository.findAll();
     }
+
+    public RatedPlaces save(RatedPlaces ratedPlaces) {
+        return ratedPlaceRepository.save(ratedPlaces);
+    }
 }
