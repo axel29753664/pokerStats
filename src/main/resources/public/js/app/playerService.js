@@ -1,11 +1,45 @@
 angular.module("mainApp")
-    .factory("playerService", function ($http, $q) {
+    .factory("playerService", function ($http, $q, ratedPlacesService) {
         return {
+            getPlayersRating: function (stats) {
+                var self = this;
+                var playersRating = self.initPlayerRating(stats.allPlayers);
+                ratedPlacesService.getRatedPlaces().then(success);
+                function success(allRatedPlaceQuantity) {
+                    var games = stats.games;
+                    for (var i = 0; i < games.length; i++) {
+                        var playersPlaces = games[i].playersPlaces;
+                        var ratedPlaceQuantityInGame = self.getRatedPlaceQuantityInGame(playersPlaces, allRatedPlaceQuantity);
+                        for (var j = 0; j < playersPlaces.length; j++) {
+                            if ((playersPlaces[j].place > 0) && (playersPlaces[j].place <= ratedPlaceQuantityInGame)) {
+                                playersRating[playersPlaces[j].player.name] += playersPlaces.length / playersPlaces[j].place;
+                            }
+                        }
+                    }
+                }
+
+                return playersRating;
+            },
+            initPlayerRating: function (players) {
+                var playersRating = {};
+                for (var a = 0; a < players.length; a++) {
+                    playersRating[players[a].name] = 0;
+                }
+                return playersRating;
+            },
+            getRatedPlaceQuantityInGame: function (playersPlaces, allRatedPlace) {
+                if (playersPlaces.length in allRatedPlace) {
+                    return allRatedPlace[playersPlaces.length];
+                } else {
+                    return 0;
+                }
+            },
+
             getPlayersAveragePlaces: function (games) {
 
-                if (games.length !=0) {
+                if (games.length != 0) {
                     var playersAveragePlaces = angular.copy(games[0].playersPlaces);
-                }else {
+                } else {
                     return;
                 }
                 for (var a = 0; a < playersAveragePlaces.length; a++) {
@@ -40,7 +74,8 @@ angular.module("mainApp")
                 }
 
                 function error(err) {
-                    deferred.reject(err);
+                    console.warn("Error sending player to server");
+                    console.warn(err);
                 }
 
                 return deferred.promise;
@@ -62,7 +97,8 @@ angular.module("mainApp")
                 }
 
                 function error(err) {
-                    deferred.reject(err);
+                    console.warn("Error deleting player");
+                    console.warn(err);
                 }
 
                 return deferred.promise;

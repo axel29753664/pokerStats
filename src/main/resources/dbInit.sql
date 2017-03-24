@@ -33,6 +33,15 @@ CREATE TABLE `player_places` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+CREATE TABLE `rated_places` (
+  `players_quantity`      INT(11) NOT NULL,
+  `rated_places_quantity` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`players_quantity`),
+  UNIQUE KEY `rated_places_players_quantity_pk` (`players_quantity`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 CREATE TABLE `roles` (
   `name` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`name`),

@@ -12,24 +12,18 @@ angular.module("mainApp")
             $scope.stats = "";
             statsService.getStatsFromServer().then(function success(stats) {
 
-                    var formatStats = statsService.convertStatsToTableFormat(stats);
-                    $scope.stats = formatStats;
-                    $scope.playersAveragePlaces = playerService.getPlayersAveragePlaces(formatStats.games);
+                var formatStats = statsService.convertStatsToTableFormat(stats);
+                $scope.stats = formatStats;
+                $scope.playersAveragePlaces = playerService.getPlayersAveragePlaces(formatStats.games);
+                $scope.playersRating = playerService.getPlayersRating(stats);
 
-                },
-                function error(error) {
-                    alert(error.data)
-                });
+            });
         }
 
         $scope.addPlayer = function (player) {
-            playerService.sendPlayerToServer(player).then(success, error);
+            playerService.sendPlayerToServer(player).then(success);
             function success() {
                 init();
-            }
-
-            function error(err) {
-                alert(err);
             }
 
         };
@@ -39,13 +33,9 @@ angular.module("mainApp")
                 $scope.deleteButton = "danger";
 
             } else {
-                gameService.deleteGames(ids).then(success, error);
+                gameService.deleteGames(ids).then(success);
                 function success() {
                     init();
-                }
-
-                function error(err) {
-                    alert(err);
                 }
 
                 $scope.deleteButton = "default";
@@ -66,13 +56,9 @@ angular.module("mainApp")
                 $scope.deletePlayersButton = "danger";
 
             } else {
-                playerService.deletePlayers(ids).then(success, error);
+                playerService.deletePlayers(ids).then(success);
                 function success() {
                     init();
-                }
-
-                function error(err) {
-                    alert(err);
                 }
 
                 $scope.deletePlayersButton = "default";
@@ -104,15 +90,12 @@ angular.module("mainApp")
         };
         $scope.saveGame = function (game) {
 
-            gameService.sendGameToServer(game).then(success, error);
+            gameService.sendGameToServer(game).then(success);
             function success() {
                 init();
             }
 
-            function error(err) {
-                alert(err);
-            }
-
         };
 
-    });
+    })
+;

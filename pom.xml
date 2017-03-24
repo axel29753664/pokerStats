@@ -87,17 +87,6 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-        <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
-        <!--&lt;!&ndash;<executable>true</executable>&ndash;&gt;-->
-        <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
-        <!--</plugin>-->
-        <!--</plugins>-->
-
     </build>
 
 </project>

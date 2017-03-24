@@ -22,7 +22,8 @@ angular.module("mainApp")
                 }
 
                 function error(err) {
-                    deferred.reject(err);
+                    console.warn("Error getting stats from server");
+                    console.warn(err);
                 }
 
                 return deferred.promise;

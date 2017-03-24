@@ -50,7 +50,8 @@ angular.module("mainApp")
                 }
 
                 function error(err) {
-                    deferred.reject(err);
+                    console.warn("Error sending game to server");
+                    console.warn(err);
                 }
 
                 return deferred.promise;
@@ -72,19 +73,11 @@ angular.module("mainApp")
                 }
 
                 function error(err) {
-                    deferred.reject(err);
+                    console.warn("Error deleting game");
+                    console.warn(err);
                 }
 
                 return deferred.promise;
             }
-            // getPlayerPlaceInGame: function (player, game) {
-            //     var playersPlaces = game.playersPlaces;
-            //     for (var i = 0; i < playersPlaces.length; i++) {
-            //         if (angular.equals(player, playersPlaces[i].player)) {
-            //             return playersPlaces[i];
-            //         }
-            //     }
-            // }
-
         }
     });

@@ -36,7 +36,7 @@
 
         <table class="table table-bordered equal-width-cols">
             <thead>
-            <tr align="center" class="panel-color-floral-white">
+            <tr align="center" class="panel-color-beige">
                 <td ng-show="deleteGameTrigger"></td>
                 <td>Дата</td>
                 <td ng-repeat="player in stats.allPlayers track by $index"> {{player.name}}</td>
@@ -52,7 +52,13 @@
             </tr>
             </thead>
             <tbody align="center">
-            <tr>
+            <tr  class="panel-color-floral-white">
+                <td ng-show="deleteGameTrigger"></td>
+                <td>Рейтинг</td>
+                <td ng-repeat="playerRating in playersRating track by $index">
+                    <b>{{playerRating==0 ? noPlaceValue :(playerRating| number:2) }}</b></td>
+            </tr>
+            <tr class="panel-color-ivory">
                 <td ng-show="deleteGameTrigger"></td>
                 <td>Среднее место</td>
                 <td ng-repeat="playerAveragePlace in playersAveragePlaces track by $index">
