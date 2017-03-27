@@ -91,11 +91,11 @@ game_id</columns>
     </foreign-key>
     <column id="35" parent="16" name="name">
       <mandatory>1</mandatory>
-      <data-type>varchar(50)|0</data-type>
+      <data-type>varbinary(50)|0</data-type>
     </column>
     <column id="36" parent="16" name="password">
       <mandatory>1</mandatory>
-      <data-type>varchar(50)|0</data-type>
+      <data-type>varbinary(50)|0</data-type>
     </column>
     <index id="37" parent="16" name="Users_name_uindex">
       <columns>name</columns>
@@ -129,7 +129,7 @@ game_id</columns>
     </key>
     <column id="44" parent="18" name="user">
       <mandatory>1</mandatory>
-      <data-type>varchar(50)|0</data-type>
+      <data-type>varbinary(50)|0</data-type>
     </column>
     <column id="45" parent="18" name="role">
       <mandatory>1</mandatory>

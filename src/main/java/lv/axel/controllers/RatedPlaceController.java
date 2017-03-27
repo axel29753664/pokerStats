@@ -40,13 +40,10 @@ public class RatedPlaceController {
 
     @RequestMapping(value = "updateRatedPlaces", method = RequestMethod.POST)
     public ResponseEntity<?> updateRatedPlaces(@RequestBody List<RatedPlacesDTO> ratedPlacesDTOList) {
-        try {
-            for (RatedPlacesDTO ratedPlacesDTO : ratedPlacesDTOList) {
-                RatedPlaces ratedPlaces = RatedPlaceDTOConverter.convertToEntity(ratedPlacesDTO);
-                ratedPlacesService.save(ratedPlaces);
-            }
-        }catch (EntityNotFoundException e){
-            return new ResponseEntity<>(new ErrorModel(e.getMessage()), HttpStatus.NOT_FOUND);
+
+        for (RatedPlacesDTO ratedPlacesDTO : ratedPlacesDTOList) {
+            RatedPlaces ratedPlaces = RatedPlaceDTOConverter.convertToEntity(ratedPlacesDTO);
+            ratedPlacesService.save(ratedPlaces);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

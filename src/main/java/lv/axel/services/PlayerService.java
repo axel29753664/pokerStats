@@ -13,6 +13,9 @@ public class PlayerService {
     private PlayerRepository playerRepository;
 
     public Player addPlayer(Player player) {
+
+        System.out.println(player);
+
         return playerRepository.save(player);
     }
 

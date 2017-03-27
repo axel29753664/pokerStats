@@ -43,7 +43,7 @@ CREATE TABLE `rated_places` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `roles` (
-  `name` VARCHAR(20) NOT NULL,
+  `name` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `Roles_name_uindex` (`name`)
 )
@@ -51,8 +51,8 @@ CREATE TABLE `roles` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `users` (
-  `name`     VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
+  `name`     VARBINARY(50) NOT NULL,
+  `password` VARBINARY(50) NOT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `Users_name_uindex` (`name`)
 )
@@ -60,8 +60,8 @@ CREATE TABLE `users` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `user_roles` (
-  `user` VARCHAR(50) NOT NULL,
-  `role` VARCHAR(10) NOT NULL,
+  `user` VARBINARY(50) NOT NULL,
+  `role` VARCHAR(10)   NOT NULL,
   KEY `user_roles_users_name_fk` (`user`),
   KEY `user_roles_roles_name_fk` (`role`),
   CONSTRAINT `user_roles_roles_name_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`name`)
