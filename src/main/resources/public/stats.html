@@ -12,9 +12,11 @@
                 </button>
                 <add-game id="gameModal" class="modal fade"></add-game>
 
-                <button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">Добавить игрока
+                <button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">
+                    Добавить игрока
                 </button>
                 <add-player id="addPlayer" class="modal fade"></add-player>
+
                 <div class="button-group pull-right" ng-show="adminAccess">
                     <button class="btn btn-{{deleteButton}}" ng-click="deleteGames(deletedGamesIds)">Удалить игру
                     </button>
@@ -39,15 +41,33 @@
         </div>
 
         <table class="table table-bordered equal-width-cols">
-            <thead>
+            <colgroup>
+                <col ng-show="deleteGameTrigger" span="1" style="width: 40px;">
+                <col span="1" style="width: 40px;">
+                <col span="1" style="width: 100px;">
+            </colgroup>
+            <thead  align="center">
+            <tr class="panel-color-floral-white">
+                <td ng-show="deleteGameTrigger"></td>
+                <td colspan="2">Рейтинг</td>
+                <td ng-repeat="playerRating in playersRating track by $index">
+                    <b>{{playerRating==0 ? noPlaceValue :(playerRating| number:2) }}</b></td>
+            </tr>
+            <tr class="panel-color-ivory">
+                <td ng-show="deleteGameTrigger"></td>
+                <td colspan="2">Среднее место</td>
+                <td ng-repeat="playerAveragePlace in playersAveragePlaces track by $index">
+                    <b>{{playerAveragePlace.place==0 ? noPlaceValue :(playerAveragePlace.place| number:2) }}</b></td>
+            </tr>
             <tr align="center" class="panel-color-beige">
                 <td ng-show="deleteGameTrigger"></td>
+                <td>ID</td>
                 <td>Дата</td>
                 <td ng-repeat="player in stats.allPlayers track by $index"> {{player.name}}</td>
             </tr>
             <tr ng-show="deletePlayersTrigger" align="center">
                 <td ng-show="deleteGameTrigger"></td>
-                <td></td>
+                <td colspan="2"></td>
                 <td ng-repeat="player in stats.allPlayers track by $index">
                     <input type="checkbox" ng-model="deletedPlayersIds[$index]"
                            ng-true-value="{{player.id}}"
@@ -56,22 +76,12 @@
             </tr>
             </thead>
             <tbody align="center">
-            <tr class="panel-color-floral-white">
-                <td ng-show="deleteGameTrigger"></td>
-                <td>Рейтинг</td>
-                <td ng-repeat="playerRating in playersRating track by $index">
-                    <b>{{playerRating==0 ? noPlaceValue :(playerRating| number:2) }}</b></td>
-            </tr>
-            <tr class="panel-color-ivory">
-                <td ng-show="deleteGameTrigger"></td>
-                <td>Среднее место</td>
-                <td ng-repeat="playerAveragePlace in playersAveragePlaces track by $index">
-                    <b>{{playerAveragePlace.place==0 ? noPlaceValue :(playerAveragePlace.place| number:2) }}</b></td>
-            </tr>
+
             <tr ng-repeat="game in stats.games track by $index">
                 <td ng-show="deleteGameTrigger"><input type="checkbox" ng-model="deletedGamesIds[$index]"
                                                        ng-true-value="{{game.id}}"
                                                        ng-false-value=""></td>
+                <td>{{game.id}}</td>
                 <td ng-switch="adminAccess">
                     <label ng-switch-when="true" ng-click="editGame(game)" data-toggle="modal" data-target="#gameModal">
                         {{game.date| date: 'yyyy-MM-dd'}}</label>

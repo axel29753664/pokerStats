@@ -44,7 +44,7 @@ angular.module("mainApp")
                 if (errors != "") {
                     deferred.reject(errors);
                 } else {
-                    $http.post("api/updateRatedPlaces", ratedPlaces).then(success, error);
+                    $http.post("api/auth/admin/updateRatedPlaces", ratedPlaces).then(success, error);
                     function success(response) {
                     }
 

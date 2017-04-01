@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @IdClass(PlayerPlaceId.class)
 @Table(name = "player_places")
-public class PlayerPlace {
+public class PlayerPlace  implements Comparable<PlayerPlace>{
 
     @Id
     @ManyToOne
@@ -29,5 +29,8 @@ public class PlayerPlace {
     @Column(name = "place")
     private int place;
 
-
+    @Override
+    public int compareTo(PlayerPlace playerPlace) {
+        return player.compareTo(playerPlace.getPlayer());
+    }
 }

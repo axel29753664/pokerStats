@@ -20,13 +20,13 @@ public class GameService {
     private PlayerService playerService;
 
     @Transactional
-    public void addGame(Game game) {
+    public Game addGame(Game game) {
         for (PlayerPlace playerPlace : game.getPlayersPlaces()) {
             Player player = playerService.findPlayerById(playerPlace.getPlayer().getId());
             playerPlace.setPlayer(player);
             playerPlace.setGame(game);
         }
-        gameRepository.save(game);
+        return gameRepository.save(game);
     }
 
     @Transactional
@@ -49,5 +49,9 @@ public class GameService {
 
     public List<Game> getAllGames() {
         return gameRepository.findAll();
+    }
+
+    public Game getGameById(Long id) {
+        return gameRepository.getOne(id);
     }
 }

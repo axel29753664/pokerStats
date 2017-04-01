@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 @EqualsAndHashCode
 @Entity
 @Table(name = "rated_places")
@@ -23,4 +23,8 @@ public class RatedPlaces {
     @Column(name = "rated_places_quantity")
     private int ratedPlacesQuantity;
 
+    @Override
+    public String toString() {
+        return playersQuantity +":" + ratedPlacesQuantity;
+    }
 }

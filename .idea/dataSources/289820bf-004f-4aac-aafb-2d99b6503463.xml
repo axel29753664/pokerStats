@@ -22,158 +22,182 @@
     <table id="17" parent="1" name="roles"/>
     <table id="18" parent="1" name="user_roles"/>
     <table id="19" parent="1" name="rated_places"/>
-    <column id="20" parent="13" name="id">
+    <table id="20" parent="1" name="history"/>
+    <column id="21" parent="13" name="id">
       <mandatory>1</mandatory>
       <data-type>bigint(20)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="21" parent="13" name="name">
+    <column id="22" parent="13" name="name">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <index id="22" parent="13" name="players_name_uindex">
+    <index id="23" parent="13" name="players_name_uindex">
       <columns>name</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="23" parent="13" name="PRIMARY">
+    <key id="24" parent="13" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="24" parent="13" name="players_name_uindex">
+    <key id="25" parent="13" name="players_name_uindex">
       <columns>name</columns>
       <underlying-index>players_name_uindex</underlying-index>
     </key>
-    <column id="25" parent="14" name="id">
+    <column id="26" parent="14" name="id">
       <mandatory>1</mandatory>
       <data-type>bigint(20)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="26" parent="14" name="date">
+    <column id="27" parent="14" name="date">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <key id="27" parent="14" name="PRIMARY">
+    <key id="28" parent="14" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="28" parent="15" name="player_id">
+    <column id="29" parent="15" name="player_id">
       <mandatory>1</mandatory>
       <data-type>bigint(20)|0</data-type>
     </column>
-    <column id="29" parent="15" name="game_id">
+    <column id="30" parent="15" name="game_id">
       <mandatory>1</mandatory>
       <data-type>bigint(20)|0</data-type>
     </column>
-    <column id="30" parent="15" name="place">
+    <column id="31" parent="15" name="place">
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="31" parent="15" name="FK46cwqclb4d0xwermgtvo2w3o5">
+    <index id="32" parent="15" name="FK46cwqclb4d0xwermgtvo2w3o5">
       <columns>game_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="32" parent="15" name="PRIMARY">
+    <key id="33" parent="15" name="PRIMARY">
       <columns>player_id
 game_id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="33" parent="15" name="player_places_players_id_fk">
+    <foreign-key id="34" parent="15" name="player_places_players_id_fk">
       <columns>player_id</columns>
       <ref-key>~.players.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="34" parent="15" name="player_places_games_id_fk">
+    <foreign-key id="35" parent="15" name="player_places_games_id_fk">
       <columns>game_id</columns>
       <ref-key>~.games.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="35" parent="16" name="name">
+    <column id="36" parent="16" name="name">
       <mandatory>1</mandatory>
       <data-type>varbinary(50)|0</data-type>
     </column>
-    <column id="36" parent="16" name="password">
+    <column id="37" parent="16" name="password">
       <mandatory>1</mandatory>
       <data-type>varbinary(50)|0</data-type>
     </column>
-    <index id="37" parent="16" name="Users_name_uindex">
+    <index id="38" parent="16" name="Users_name_uindex">
       <columns>name</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="38" parent="16" name="PRIMARY">
+    <key id="39" parent="16" name="PRIMARY">
       <columns>name</columns>
       <primary>1</primary>
     </key>
-    <key id="39" parent="16" name="Users_name_uindex">
+    <key id="40" parent="16" name="Users_name_uindex">
       <columns>name</columns>
       <underlying-index>Users_name_uindex</underlying-index>
     </key>
-    <column id="40" parent="17" name="name">
+    <column id="41" parent="17" name="name">
       <mandatory>1</mandatory>
       <data-type>varchar(20)|0</data-type>
     </column>
-    <index id="41" parent="17" name="Roles_name_uindex">
+    <index id="42" parent="17" name="Roles_name_uindex">
       <columns>name</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="42" parent="17" name="PRIMARY">
+    <key id="43" parent="17" name="PRIMARY">
       <columns>name</columns>
       <primary>1</primary>
     </key>
-    <key id="43" parent="17" name="Roles_name_uindex">
+    <key id="44" parent="17" name="Roles_name_uindex">
       <columns>name</columns>
       <underlying-index>Roles_name_uindex</underlying-index>
     </key>
-    <column id="44" parent="18" name="user">
+    <column id="45" parent="18" name="user">
       <mandatory>1</mandatory>
       <data-type>varbinary(50)|0</data-type>
     </column>
-    <column id="45" parent="18" name="role">
+    <column id="46" parent="18" name="role">
       <mandatory>1</mandatory>
       <data-type>varchar(10)|0</data-type>
     </column>
-    <index id="46" parent="18" name="user_roles_roles_name_fk">
+    <index id="47" parent="18" name="user_roles_roles_name_fk">
       <columns>role</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="47" parent="18" name="user_roles_users_name_fk">
+    <index id="48" parent="18" name="user_roles_users_name_fk">
       <columns>user</columns>
       <desc-columns></desc-columns>
     </index>
-    <foreign-key id="48" parent="18" name="user_roles_users_name_fk">
+    <foreign-key id="49" parent="18" name="user_roles_users_name_fk">
       <columns>user</columns>
       <ref-key>~.users.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="49" parent="18" name="user_roles_roles_name_fk">
+    <foreign-key id="50" parent="18" name="user_roles_roles_name_fk">
       <columns>role</columns>
       <ref-key>~.roles.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="50" parent="19" name="players_quantity">
+    <column id="51" parent="19" name="players_quantity">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="51" parent="19" name="rated_places_quantity">
+    <column id="52" parent="19" name="rated_places_quantity">
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="52" parent="19" name="rated_places_players_quantity_pk">
+    <index id="53" parent="19" name="rated_places_players_quantity_pk">
       <columns>players_quantity</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="53" parent="19" name="PRIMARY">
+    <key id="54" parent="19" name="PRIMARY">
       <columns>players_quantity</columns>
       <primary>1</primary>
     </key>
-    <key id="54" parent="19" name="rated_places_players_quantity_pk">
+    <key id="55" parent="19" name="rated_places_players_quantity_pk">
       <columns>players_quantity</columns>
       <underlying-index>rated_places_players_quantity_pk</underlying-index>
+    </key>
+    <column id="56" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="57" parent="20" name="date">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="58" parent="20" name="user_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="59" parent="20" name="action">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="60" parent="20" name="description">
+      <data-type>varchar(400)|0</data-type>
+    </column>
+    <key id="61" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
     </key>
   </database-model>
 </dataSource>

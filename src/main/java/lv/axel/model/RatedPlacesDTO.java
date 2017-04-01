@@ -4,11 +4,15 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
+//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class RatedPlacesDTO {
     private int playersQuantity;
     private int ratedPlacesQuantity;
 
+    @Override
+    public String toString() {
+        return playersQuantity + ":" + ratedPlacesQuantity;
+    }
 }

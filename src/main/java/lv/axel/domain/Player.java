@@ -12,7 +12,7 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = {"playerPlaces"})
 @Entity
 @Table(name = "players")
-public class Player  {
+public class Player  implements Comparable<Player>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,4 +27,8 @@ public class Player  {
         this.name = name;
     }
 
+    @Override
+    public int compareTo(Player player) {
+        return name.compareTo(player.getName());
+    }
 }

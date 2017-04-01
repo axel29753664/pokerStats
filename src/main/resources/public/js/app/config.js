@@ -7,6 +7,11 @@ app.config(function ($routeProvider, $httpProvider) {
             controller: "statsController",
             controllerAs:"statsCtrl"
         })
+        .when('/history', {
+            templateUrl: 'history.html',
+            controller: 'historyController',
+            controllerAs: 'historyCtrl'
+        })
         .when('/login', {
             templateUrl: 'login.html',
             controller: 'loginController',

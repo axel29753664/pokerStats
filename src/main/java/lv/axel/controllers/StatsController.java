@@ -32,7 +32,7 @@ public class StatsController {
     private PlayerService playerService;
 
     @RequestMapping(value = "getStats", method = RequestMethod.GET)
-    ResponseEntity<StatsDTO> getStats() {
+    public ResponseEntity<StatsDTO> getStats() {
 
         List<Player> players = playerService.getAllPlayers();
         List<Game> games = gameService.getAllGames();

@@ -40,9 +40,9 @@ angular.module("mainApp")
                 this.prepareGame(game);
                 var deferred = $q.defer();
                 if (game.id == undefined) {
-                    $http.post("api/addGame", game).then(success, error);
+                    $http.post("api/auth/addGame", game).then(success, error);
                 } else {
-                    $http.post("api/updateGame", game).then(success, error);
+                    $http.post("api/auth/admin/updateGame", game).then(success, error);
                 }
 
                 function success(response) {
@@ -67,7 +67,7 @@ angular.module("mainApp")
             deleteGames: function (ids) {
                 this.prepareIdsArr(ids);
                 var deferred = $q.defer();
-                $http.post("api/deleteGames", ids).then(success, error);
+                $http.post("api/auth/admin/deleteGames", ids).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }

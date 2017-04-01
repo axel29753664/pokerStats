@@ -9,14 +9,15 @@
 <body ng-app="mainApp">
 
 <div ng-controller="logoutController as logout">
-<ul class="nav nav-pills" role="tablist">
-    <li><a href="#!/">Статистика</a></li>
-    <li ng-show="!authenticated"><a href="#!/login">Войти</a></li>
-    <li ng-show="authenticated"><a href="" ng-click="logout.logout()">Выйти</a></li>
-</ul>
+    <ul class="nav nav-pills" role="tablist">
+        <li><a href="#!/">Статистика</a></li>
+        <li ng-show="authenticated"><a href="#!/history">История</a></li>
+        <li ng-show="!authenticated"><a href="#!/login">Войти</a></li>
+        <li ng-show="authenticated"><a href="" ng-click="logout.logout()">Выйти</a></li>
+    </ul>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div ng-view></div>
 </div>
 <script type="text/javascript" src="js/lib/angular.min.js"></script>
@@ -31,11 +32,13 @@
 <script type="text/javascript" src="js/app/loginController.js"></script>
 <script type="text/javascript" src="js/app/logoutController.js"></script>
 <script type="text/javascript" src="js/app/statsController.js"></script>
+<script type="text/javascript" src="js/app/historyController.js"></script>
 <script type="text/javascript" src="js/app/statsService.js"></script>
 <script type="text/javascript" src="js/app/gameService.js"></script>
 <script type="text/javascript" src="js/app/playerService.js"></script>
 <script type="text/javascript" src="js/app/loginService.js"></script>
 <script type="text/javascript" src="js/app/ratedPlaceService.js"></script>
+<script type="text/javascript" src="js/app/historyService.js"></script>
 
 </body>
 </html>

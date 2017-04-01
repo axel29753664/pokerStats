@@ -2,14 +2,17 @@
     background: floralwhite;
     color: black;
 }
+
 .panel-color-beige {
     background: beige;
     color: black;
 }
+
 .panel-color-ivory {
     background: ivory;
     color: black;
 }
+
 .panel-color-light-gray {
     background: lightgray;
     color: black;
@@ -24,6 +27,5 @@
     table-layout: fixed;
 }
 
-.equal-width-cols td {
-    width: 100%;
-}
+
+

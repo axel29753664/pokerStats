@@ -67,7 +67,7 @@ angular.module("mainApp")
             },
             sendPlayerToServer: function (player) {
                 var deferred = $q.defer();
-                $http.post("api/addPlayer", player).then(success, error);
+                $http.post("api/auth/addPlayer", player).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }
@@ -90,7 +90,7 @@ angular.module("mainApp")
             deletePlayers: function (ids) {
                 this.prepareIdsArr(ids);
                 var deferred = $q.defer();
-                $http.post("api/deletePlayers", ids).then(success, error);
+                $http.post("api/auth/admin/deletePlayers", ids).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }
