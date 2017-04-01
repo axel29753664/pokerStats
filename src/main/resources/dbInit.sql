@@ -42,6 +42,18 @@ CREATE TABLE `rated_places` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+CREATE TABLE `history` (
+  `id`          BIGINT(20)  NOT NULL AUTO_INCREMENT,
+  `date`        DATETIME    NOT NULL,
+  `user_name`   VARCHAR(50) NOT NULL,
+  `action`      VARCHAR(10)          DEFAULT NULL,
+  `description` VARCHAR(400)         DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 67
+  DEFAULT CHARSET = utf8;
+
 CREATE TABLE `roles` (
   `name` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`name`),
