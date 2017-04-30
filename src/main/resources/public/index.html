@@ -8,14 +8,19 @@
 </head>
 <body ng-app="mainApp">
 
-<div ng-controller="logoutController as logout">
-    <ul class="nav nav-pills" role="tablist">
-        <li><a href="#!/">Статистика</a></li>
-        <li ng-show="authenticated"><a href="#!/history">История</a></li>
-        <li ng-show="!authenticated"><a href="#!/login">Войти</a></li>
-        <li ng-show="authenticated"><a href="" ng-click="logout.logout()">Выйти</a></li>
-    </ul>
-</div>
+<ul class="nav nav-pills" role="tablist">
+    <li><a href="#!/">Статистика</a></li>
+    <li ng-show="authenticated"><a href="#!/history">История</a></li>
+    <li ng-show="adminAccess"  ng-controller="registrationController">
+        <a data-toggle="modal" data-target="#registrationModal" href="" ng-click="initRegModal()">Регистрация</a>
+        <reg-modal id="registrationModal" class="modal fade" data-backdrop="static"></reg-modal>
+    </li>
+    <li ng-show="!authenticated"><a href="#!/login">Войти</a></li>
+    <li ng-show="authenticated" ng-controller="logoutController as logout">
+        <a href="#" ng-click="logout.logout()">Выйти</a></li>
+</ul>
+
+
 
 <div class="container-fluid">
     <div ng-view></div>
@@ -33,12 +38,14 @@
 <script type="text/javascript" src="js/app/logoutController.js"></script>
 <script type="text/javascript" src="js/app/statsController.js"></script>
 <script type="text/javascript" src="js/app/historyController.js"></script>
+<script type="text/javascript" src="js/app/registrationController.js"></script>
 <script type="text/javascript" src="js/app/statsService.js"></script>
 <script type="text/javascript" src="js/app/gameService.js"></script>
 <script type="text/javascript" src="js/app/playerService.js"></script>
 <script type="text/javascript" src="js/app/loginService.js"></script>
 <script type="text/javascript" src="js/app/ratedPlaceService.js"></script>
 <script type="text/javascript" src="js/app/historyService.js"></script>
+<script type="text/javascript" src="js/app/registrationValidator.js"></script>
 
 </body>
 </html>

@@ -28,12 +28,12 @@ angular.module("mainApp")
             checkRatedPlacesToWrongFormat: function (ratedPlaces) {
                 var errors = "";
                 for (var i = 0; i < ratedPlaces.length; i++) {
-                    if (ratedPlaces[i].ratedPlacesQuantity == undefined) {
+                    if (ratedPlaces[i].ratedPlacesQuantity === undefined) {
                         errors += ratedPlaces[i].playersQuantity
                             + ": " + ratedPlaces[i].ratedPlacesQuantity + " ";
                     }
                 }
-                if (errors != "") {
+                if (errors !== "") {
                     return "Wrong enter at: " + errors;
                 }
                 return errors;
@@ -41,7 +41,7 @@ angular.module("mainApp")
             sendRatedPlacesToServer: function (ratedPlaces) {
                 var errors = this.checkRatedPlacesToWrongFormat(ratedPlaces);
                 var deferred = $q.defer();
-                if (errors != "") {
+                if (errors !== "") {
                     deferred.reject(errors);
                 } else {
                     $http.post("api/auth/admin/updateRatedPlaces", ratedPlaces).then(success, error);
@@ -57,9 +57,9 @@ angular.module("mainApp")
                 return deferred.promise;
             },
             addNeRatedPlaces: function (allRatedPlaces, newRatedPlaces) {
-                if (newRatedPlaces != undefined) {
-                    if ((newRatedPlaces.playersQuantity != undefined)
-                        && (newRatedPlaces.ratedPlacesQuantity != undefined)
+                if (newRatedPlaces !== undefined) {
+                    if ((newRatedPlaces.playersQuantity !== undefined)
+                        && (newRatedPlaces.ratedPlacesQuantity !== undefined)
                         && (newRatedPlaces.playersQuantity >= newRatedPlaces.ratedPlacesQuantity)) {
                         allRatedPlaces[allRatedPlaces.length] = newRatedPlaces;
                     } else {

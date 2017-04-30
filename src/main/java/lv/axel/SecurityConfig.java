@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,7 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService)
+        .passwordEncoder(new BCryptPasswordEncoder());
+
     }
 
     @Override
@@ -25,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/*", "/api/*", " /css/**", "/js/**").permitAll()
+                .antMatchers("/*", "/api/*", "/css/**", "/js/**").permitAll()
+                .antMatchers("/admin/**", "/api/auth/admin/**").access("hasRole('ADMIN')")
                 .anyRequest().authenticated()
                 .and().csrf().disable(); //add this
     }

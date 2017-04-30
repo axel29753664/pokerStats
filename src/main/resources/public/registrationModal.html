@@ -1,0 +1,55 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Заголовок модального окна -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Создания нового пользователя</h4>
+        </div>
+        <div ng-show="!regSuccess">
+            <form name="registrationForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Логин:</label>
+                        <div class="alert alert-danger" ng-show="errors.name">
+                            <div ng-repeat="error in errors.name">{{error}}</div>
+                        </div>
+                        <input type="text" class="form-control" name="name" ng-model="newUser.name" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль:</label>
+                        <div class="alert alert-danger" ng-show="errors.password">
+                            <div ng-repeat="error in errors.password">{{error}}</div>
+                        </div>
+                        <input type="password" class="form-control" ng-model="newUser.password" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль повторно:</label>
+                        <div class="alert alert-danger" ng-show="errors.passwordRepeat">
+                            <div ng-repeat="error in errors.passwordRepeat">{{error}}</div>
+                        </div>
+                        <input type="password" class="form-control" ng-model="newUser.passwordRepeat" required/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="addNewUser()">
+                        Сохранить
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Закрыть
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div ng-show="regSuccess">
+            <div class="modal-body">
+                <p class="alert alert-success">Пользователь {{newUser.name}} создан !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

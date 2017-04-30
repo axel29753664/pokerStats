@@ -62,27 +62,40 @@ CREATE TABLE `roles` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `users` (
-  `name`     VARBINARY(50) NOT NULL,
-  `password` VARBINARY(50) NOT NULL,
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `Users_name_uindex` (`name`)
+CREATE TABLE users
+(
+  id       BIGINT        NOT NULL AUTO_INCREMENT
+    PRIMARY KEY,
+  name     VARBINARY(50) NOT NULL,
+  password VARCHAR(60)   NOT NULL,
+
+  CONSTRAINT Users_name_uindex
+  UNIQUE (name)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE `user_roles` (
-  `user` VARBINARY(50) NOT NULL,
-  `role` VARCHAR(10)   NOT NULL,
-  KEY `user_roles_users_name_fk` (`user`),
-  KEY `user_roles_roles_name_fk` (`role`),
-  CONSTRAINT `user_roles_roles_name_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `user_roles_users_name_fk` FOREIGN KEY (`user`) REFERENCES `users` (`name`)
-    ON DELETE CASCADE
+
+CREATE TABLE user_roles
+(
+  user_id BIGINT      NOT NULL,
+  role    VARCHAR(10) NOT NULL,
+  CONSTRAINT user_id_roles_users_id_fk
+  FOREIGN KEY (user_id) REFERENCES users (id)
     ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT user_roles_roles_name_fk
+  FOREIGN KEY (role) REFERENCES roles (name)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE INDEX user_id_roles_users_id_fk
+  ON user_roles (user_id);
+
+CREATE INDEX user_roles_roles_name_fk
+  ON user_roles (role);
+
 

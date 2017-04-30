@@ -24,3 +24,12 @@ app.directive("updateRatedPlaces", function () {
     };
 
 });
+
+app.directive("regModal", function () {
+    return {
+        restrict: "E",
+        templateUrl: "registrationModal.html"
+
+    };
+
+});

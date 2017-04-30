@@ -20,13 +20,23 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user"),
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role"))
     private Set<Role> roles;
 
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role("ROLE_USER"));
+        this.roles = roles;
+    }
 }

@@ -17,7 +17,7 @@ angular.module("mainApp")
                             $rootScope.adminAccess = false;
                             var authorities = response.data.authorities;
                             for (var i = 0; i < authorities.length; i++) {
-                                if (authorities[i].authority == "ADMIN") {
+                                if (authorities[i].authority === "ROLE_ADMIN") {
                                     $rootScope.adminAccess = true;
                                 }
                             }
