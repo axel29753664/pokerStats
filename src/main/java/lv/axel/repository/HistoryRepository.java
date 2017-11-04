@@ -10,6 +10,6 @@ import java.util.List;
 public interface HistoryRepository extends JpaRepository<History, Long> {
     List<History> findAllByOrderByDateDesc();
 
-    @Query("select b from History b " + "where b.date between ?2 and ?1 order by b.date desc")
+    @Query("select b from History b " + "where b.date between ?1 and ?2 order by b.date desc")
     List<History> findByDateBetweenOrderByDateDesc(Date startDate, Date endDate);
 }

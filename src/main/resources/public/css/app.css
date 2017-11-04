@@ -27,5 +27,13 @@
     table-layout: fixed;
 }
 
+a:focus{
+    outline: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
 
 
