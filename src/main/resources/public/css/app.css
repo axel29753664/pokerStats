@@ -35,5 +35,30 @@ a:focus{
     outline: none;
 }
 
+.action-buttons {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.action-buttons > .button-group {
+    width: 33%;
+}
+
+.year-block {
+    display: inline-block;
+    width: 34%;
+}
+
+.year-block > div {
+    display: inline-block;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
 
 

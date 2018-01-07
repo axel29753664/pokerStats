@@ -1,10 +1,14 @@
 angular.module("mainApp")
     .controller("statsController", function ($scope, statsService, playerService, gameService, loginService, ratedPlacesService) {
+        var currentYear = new Date().getFullYear();
+        $scope.years = [{label: "За всё время", value: ''}];
         $scope.deleteButton = "default";
         $scope.deletePlayersButton = "default";
         $scope.deleteGameTrigger = false;
         $scope.deletePlayersTrigger = false;
         $scope.noPlaceValue = "-";
+
+        initYears();
         init();
 
         function init() {
@@ -12,7 +16,7 @@ angular.module("mainApp")
             $scope.stats = undefined;
             $scope.ratedPlaces = undefined;
 
-            statsService.getStatsFromServer().then(function success(stats) {
+            statsService.getStatsFromServer($scope.selectedYear.value).then(function success(stats) {
 
                 var formatStats = statsService.convertStatsToTableFormat(stats);
                 $scope.stats = formatStats;
@@ -23,10 +27,20 @@ angular.module("mainApp")
                     $scope.ratedPlaces = ratedPlaces;
                     $scope.playersRating = playerService.getPlayersRating(stats, ratedPlaces);
                 }
-
             });
-
         }
+
+        function initYears() {
+            var playedYears = currentYear - 2017;
+            for (var i = 0; i <= playedYears; i++){
+                $scope.years.push({label: currentYear - i, value: currentYear - i})
+            }
+            $scope.selectedYear = $scope.years[1];
+        }
+
+        $scope.updateStats = function () {
+            init();
+        };
 
         $scope.addPlayer = function (player) {
             playerService.sendPlayerToServer(player).then(success);

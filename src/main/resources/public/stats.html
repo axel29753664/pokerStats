@@ -6,20 +6,35 @@
     </div>
     <div class="panel-body">
 
-        <div class="panel" ng-show="authenticated">
-            <div class="button-group">
-                <button class="btn btn-default" data-toggle="modal" data-target="#gameModal"
-                        ng-click="createNewGame(stats.allPlayers)">
-                    Добавить игру
-                </button>
-                <add-game id="gameModal" class="modal fade"></add-game>
+        <div class="action-buttons">
+            <div class="button-group text-left">
+                <div ng-show="authenticated">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#gameModal"
+                            ng-click="createNewGame(stats.allPlayers)">
+                        Добавить игру
+                    </button>
+                    <add-game id="gameModal" class="modal fade"></add-game>
 
-                <button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">
-                    Добавить игрока
-                </button>
-                <add-player id="addPlayer" class="modal fade"></add-player>
+                    <button class="btn btn-default" data-toggle="modal" data-target="#addPlayer">
+                        Добавить игрока
+                    </button>
+                    <add-player id="addPlayer" class="modal fade"></add-player>
+                </div>
+            </div>
 
-                <div class="button-group pull-right" ng-show="adminAccess">
+            <div class="year-block text-center">
+                <div>Статистика за:</div>
+                <div>
+                    <select class="form-control"
+                            ng-model="selectedYear"
+                            ng-options="year.label for year in years"
+                            ng-change="updateStats()">
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-group text-right">
+                <div ng-show="adminAccess">
                     <button class="btn btn-{{deleteButton}}" ng-click="deleteGames(deletedGamesIds)">Удалить игру
                     </button>
                     <button class="btn btn-primary" ng-click="cancelDeleteGames()" ng-show="deleteGameTrigger">
@@ -37,18 +52,18 @@
                         Поменять призовые места
                     </button>
                     <update-rated-places id="ratedPlacesModal" class="modal fade"></update-rated-places>
-                     
                 </div>
             </div>
         </div>
 
         <table class="table table-bordered equal-width-cols">
+
             <colgroup>
                 <col ng-show="deleteGameTrigger" span="1" style="width: 40px;">
                 <col span="1" style="width: 40px;">
                 <col span="1" style="width: 100px;">
             </colgroup>
-            <thead  align="center">
+            <thead align="center">
             <tr class="panel-color-floral-white">
                 <td ng-show="deleteGameTrigger"></td>
                 <td colspan="2">Рейтинг</td>

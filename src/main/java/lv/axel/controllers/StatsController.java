@@ -14,12 +14,10 @@ import lv.axel.services.dtoConverters.StatsDTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,10 +30,10 @@ public class StatsController {
     private PlayerService playerService;
 
     @RequestMapping(value = "getStats", method = RequestMethod.GET)
-    public ResponseEntity<StatsDTO> getStats() {
+    public ResponseEntity<StatsDTO> getStats(@RequestParam(value = "year", required = false) Integer year) {
 
         List<Player> players = playerService.getAllPlayers();
-        List<Game> games = gameService.getAllGames();
+        List<Game> games = gameService.getAllGames(year);
         StatsDTO statsDTO = StatsDTOConverter.convertToDTO(players, games);
 
         return new ResponseEntity<>(statsDTO, HttpStatus.OK);

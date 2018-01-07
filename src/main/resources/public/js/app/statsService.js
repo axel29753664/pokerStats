@@ -13,10 +13,10 @@ angular.module("mainApp")
                 return formatStats;
             },
 
-            getStatsFromServer: function () {
+            getStatsFromServer: function (year) {
                 var deferred = $q.defer();
 
-                $http.get("api/getStats").then(success, error);
+                $http.get("api/getStats?year=" + year).then(success, error);
                 function success(response) {
                     deferred.resolve(response.data);
                 }

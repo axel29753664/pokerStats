@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.time.*;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class GameService {
@@ -47,8 +47,17 @@ public class GameService {
         gameRepository.delete(id);
     }
 
-    public List<Game> getAllGames() {
-        return gameRepository.findAll();
+    public List<Game> getAllGames(Integer year) {
+        if (year != null){
+            LocalDateTime startDate = LocalDateTime.of(year, Month.JANUARY, 1, 0, 0);
+            LocalDateTime endDate = LocalDateTime.of(year, Month.DECEMBER, 31, 23, 59);
+            Date currentYearFirstDate = Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant());
+            Date currentYearLastDate = Date.from(endDate.atZone(ZoneId.systemDefault()).toInstant());
+
+            return gameRepository.findByDateBetween(currentYearFirstDate, currentYearLastDate);
+        } else {
+            return gameRepository.findAll();
+        }
     }
 
     public Game getGameById(Long id) {
